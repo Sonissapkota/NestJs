@@ -1,10 +1,10 @@
-import { Controller, Get } from "@nestjs/common";
-import { get } from "http";
+import { Controller, Post, Redirect } from "@nestjs/common";
 
-@Controller("/users")
-export class UsersController {
-    @Get("/profile")
-    getProfile(){
-        return "Hello Sonis"
+@Controller('/users')
+export class UsersController{
+    @Post("/account")
+    @Redirect()
+    getAccount(){
+        return "Hello there"
     }
 }
