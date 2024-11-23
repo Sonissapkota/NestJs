@@ -4,8 +4,8 @@ import { Controller, Get, Param } from "@nestjs/common";
 export class usersController{
 
     @Get('/account/:id/:name')
-    getAccount(@Param('name') param: string){
-        console.log(param)
+    getAccount(@Param() params: Record<number,string>){
+        console.log(params)
         return 'success'
     }
 }
