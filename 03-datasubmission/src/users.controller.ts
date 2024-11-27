@@ -1,11 +1,25 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { CreateUserDTO } from "./dto";
+import { get } from "http";
 
-@Controller("/admin")
+const USERS = []
+
+@Controller("/users")
 export class usersController{
+    @Post()
+    addUser(@Body() createUserDto: CreateUserDTO){
+        USERS.push(createUserDto);
+        return "User added"
+    }
 
-    @Post("/login")
-    loginUser(@Body() requestdata: Record<string, any>){
-        console.log(requestdata)
-        return "Success"
+    @Get()
+    displayUser(){
+        return USERS;
+    }
+
+    @Get(":id")
+    displayUserByID(@Param("id") id: number){
+        console.log(USERS.find(user => user.id === id))
+        return USERS.find(user => user.id === id)
     }
 }
