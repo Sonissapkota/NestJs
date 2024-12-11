@@ -1,11 +1,15 @@
 {
   "dependencies": {
     "@nestjs/platform-express": "^10.4.13",
+    "@nestjs/typeorm": "^10.0.2",
     "multer": "^1.4.5-lts.1",
-    "pg": "^8.13.1"
+    "mysql2": "^3.11.5",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/multer": "^1.4.12",
     "@types/node": "^22.10.1"
-  }
+  },
+  "packageManager": "yarn@4.5.2+sha224.c2e2e9ed3cdadd6ec250589b3393f71ae56d5ec297af11cec1eba3b4"
 }
