@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtStrategy } from './jwt-strategy/jwt-strategy';
+import { User } from './auth/entity/auth.entity';
 
 @Module({
   imports: [
@@ -15,11 +15,11 @@ import { JwtStrategy } from './jwt-strategy/jwt-strategy';
       username: 'postgres',
       password: 'admin',
       database: 'auth',
-      entities: [],
+      entities: [User],
       synchronize: true,
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy],
+  providers: [AppService],
 })
 export class AppModule {}
