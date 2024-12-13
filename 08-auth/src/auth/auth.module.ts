@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/auth.entity';
@@ -10,7 +10,7 @@ import { JwtAuthMiddleware } from './jwt-auth.middleware';
 
 
 @Module({
-  providers: [AuthService, JwtStrategy,JwtAuthMiddleware],
+  providers: [AuthService, JwtStrategy, JwtAuthMiddleware],
   controllers: [AuthController],
   imports: [
     TypeOrmModule.forFeature([User]),

@@ -20,6 +20,10 @@ import { JwtAuthMiddleware } from './auth/jwt-auth.middleware';
       entities: [User],
       synchronize: true,
     }),
+    JwtModule.register({
+      secret: 'secret-key',
+      signOptions: {expiresIn: '1h'}
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
