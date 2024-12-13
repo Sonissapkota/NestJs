@@ -4,11 +4,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entity/auth.entity';
 import { AuthRepository } from './repository/auth.repository';
 import { AuthDto } from './dto/auth.dto';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
     constructor(
-        @InjectRepository(User) private readonly authRepository: AuthRepository,
+        @InjectRepository(User) private authRepository: Repository<User>,
         private readonly jwtService: JwtService
     ){}
     async validateUser(authDto: AuthDto){
@@ -27,5 +28,8 @@ export class AuthService {
     async register(authDto: AuthDto){
         const newUser =  this.authRepository.create(authDto)
         return await this.authRepository.save(newUser);
+    }
+    async display(){
+        return await this.authRepository.find();
     }
 }

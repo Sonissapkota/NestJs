@@ -1,15 +1,17 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './auth/entity/auth.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtAuthMiddleware } from './auth/jwt-auth.middleware';
 
 @Module({
   imports: [
     AuthModule,
       TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
@@ -22,4 +24,8 @@ import { User } from './auth/entity/auth.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+      consumer.apply(JwtAuthMiddleware).forRoutes("auth/users")
+  }
+}
